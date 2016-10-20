@@ -5,7 +5,7 @@ using KSP.IO;
 
 /******************************************************************************
  * Copyright (c) 2013-2014, Justin Bengtson
- * Copyright (c) 2014-2015, Maik Schreiber
+ * Copyright (c) 2014-2016, Maik Schreiber
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
@@ -37,8 +37,9 @@ namespace RegexKSP {
 		/// Creates a new Meneuver Node Gizmo if needed
 		/// </summary>
 		internal static void CreateNodeGizmo(this ManeuverNode node) {
-			if(node.attachedGizmo != null) { return; }
-			node.AttachGizmo(MapView.ManeuverNodePrefab, FlightGlobals.ActiveVessel.patchedConicRenderer);
+			if (node.attachedGizmo == null) {
+				node.AttachGizmo(MapView.ManeuverNodePrefab, FlightGlobals.ActiveVessel.patchedConicRenderer);
+			}
 		}
 
 		/// <summary>

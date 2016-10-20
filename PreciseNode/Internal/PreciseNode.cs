@@ -5,7 +5,7 @@ using KSP.IO;
 
 /******************************************************************************
  * Copyright (c) 2013-2014, Justin Bengtson
- * Copyright (c) 2014-2015, Maik Schreiber
+ * Copyright (c) 2014-2016, Maik Schreiber
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
@@ -50,7 +50,7 @@ namespace RegexKSP {
 			ADDWIDGET
 		};
 
-		internal static int VERSION = 10;
+		internal static int VERSION = 11;
 
 		private static readonly Color PROGRADE_COLOR = new Color(86, 144, 0);
 		private static readonly Color NORMAL_COLOR = new Color(151, 0, 162);
@@ -523,7 +523,8 @@ namespace RegexKSP {
 				MapView.MapCamera.SetTarget(curState.node.scaledSpaceTarget);
 			}
 			GUIParts.drawButton("Del", Color.red, () => {
-				solver.RemoveManeuverNode(curState.node);
+				curState.node.RemoveSelf();
+				//solver.RemoveManeuverNode(curState.node);
 				curState.clearMemory();
 			});
 			GUI.enabled = count > 1;
@@ -637,14 +638,6 @@ namespace RegexKSP {
 			options.removeUsedNodes = GUILayout.Toggle(options.removeUsedNodes, "Remove used nodes");
             //TODO: Add threshold controls for removing used nodes
 #endif
-
-			if (UpdateChecker.Done && (UpdateChecker.UpdateAvailable == true)) {
-				GUILayout.Space(5);
-				Color oldColor = GUI.color;
-				GUI.color = Color.yellow;
-				GUILayout.Label("An update to this plugin is available.");
-				GUI.color = oldColor;
-			}
 
 			GUILayout.EndVertical();
 			GUI.DragWindow();
